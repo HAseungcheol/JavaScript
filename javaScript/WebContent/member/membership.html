@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>membership</h2>
+<form action ="member.jsp" method="get">
+ <p>이름: <input type="text" name="name"></p>
+ <p>아이디: <input type="text" name="ID" size="15" required></p>
+  <p>비번: <input type="password" name="psw" size="15" required></p>
+  <p>전공 : 
+      <select name="subject">
+         <option value="1" selected>자바</option>
+         <option value="2">오라클</option>
+         <option value="3">자바스크립트</option>
+      </select></p>
+
+  <p></p>
+  <input type="submit" value="전송">
+  <input type="reset" value="다시작성">
+</form>
+</body>
+</html>
