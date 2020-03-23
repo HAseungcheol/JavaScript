@@ -1,0 +1,49 @@
+body {
+    background-color: gray;
+}
+a {
+    color: red;
+}
+
+#header {
+    background-color: blue;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+/* header : 페이지의 머릿말 부분 */
+#container {
+    background-color: white;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* container : 홈페이지 뒷배경 부분 */
+#content {
+    padding: 10px;
+}
+/* content : 홈페이지 본문 전체 부분 */
+#nav {
+    width: 180px;
+    float: left;
+}
+/* nav : 홈페이지 본문의 왼쪽 부분 */
+#nav ul {
+    list-style-type: none;
+}
+#main {
+    width: 600px;
+    float: right;
+}
+/* main : 홈페이지 본문의 중앙 부분 */
+#nav .selected{
+    font-weight: bold;
+}
+#footer {
+    clear: both;
+    padding: 10px;
+    background-color: #999999;
+    color: white;
+    text-align: right;
+}
+/* footer : 홈페이지 꼬릿말 부분 */
