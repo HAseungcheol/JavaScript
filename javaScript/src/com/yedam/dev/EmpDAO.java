@@ -25,6 +25,23 @@ public class EmpDAO {
 		}
 	}
 
+	public void insertEmp(Employee emp) {
+		String sql = "insert into emp (employee_id, last_name, email, hire_date, job_id) \r\n" + 
+				"values((select max(employee_id)+1 from emp),"
+				+ "?,?,sysdate,?)";  //last_name, email, job_id 순
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, emp.getLastName());
+			pstmt.setString(2, emp.getEmail());
+			pstmt.setString(3, emp.getJobId());
+			int iCnt = pstmt.executeUpdate();
+			System.out.println(iCnt + "건 입력.");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<Employee> getEmpList() {
 		String sql = "select * from employees";
 		List<Employee> list = new ArrayList<>();
