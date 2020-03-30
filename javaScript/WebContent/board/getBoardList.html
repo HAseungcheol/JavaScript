@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Board</title>
+</head>
+
+<body>
+	content: <input type="text" name="" id="content"><br>
+	writer: <input type="text" name="" id="writer"><br>
+	<button onclick="insertBoardFunc()">Click</button>
+	<p id="show"></p>
+	
+	<script>
+		var show = document.getElementById("show");
+		var $table, $tr, $td, $text;
+		var xhtp = new XMLHttpRequest();
+		xhtp.onreadystatechange = function() {
+			if (xhtp.readyState == 4 && xhtp.status == 200) {
+				var datas = JSON.parse(xhtp.responseText);
+				console.log(xhtp.responseText);
+				
+				$title = ["boardNo", "content","writer","date"]
+				$table = document.createElement("table");
+				$table.setAttribute("border", 1);
+				datas.forEach(function(o) {
+					$tr = document.createElement("tr");
+					for (f in o) { //in이 필드값 하나하나 받기위해서 
+						$text = document.createTextNode(o[f]);
+						$td = document.createElement("td");
+						if(f == "boardNo"){ //boarNO 필드값 가져오기 위해서
+							var $a = document.createElement("a")
+							$a.setAttribute("href", "getBoard.jsp?boardNo="+o[f]);
+							$a.innerHTML = o[f];
+							$td.appendChild($a);
+						}
+						else { //링크 안걸리면 텍스트 하나씩 넣어주기 위해서
+						$td.appendChild($text);
+							
+						}
+							
+						$tr.appendChild($td);
+					}
+					$table.appendChild($tr);
+				});
+				show.appendChild($table);
+				}
+			}
+		xhtp.open("get", "../GetBoardListServlet", true);
+		xhtp.send();
+		
+		function insertBoardFunc(){
+			var content = document.getElementById("content").value;
+			var writer = document.getElementById("writer").value;
+			var xhtp = new XMLHttpRequest();
+			xhtp.onreadystatechange = function(){
+				console.log(xhtp.responseText);
+			
+		}
+		xhtp.open("post","../InsertBoardServlet",true); //true비동기 방식, false:동기방식
+        xhtp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhtp.send("content=" + content +"&writer=" +writer);
+        }
+	</script>
+</body>
+
+</html>

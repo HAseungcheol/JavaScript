@@ -12,7 +12,7 @@ import com.yedam.dev.Employee;
 
 public class BoardDAO {
 	Connection conn = null;
-
+ //디비 연결
 	public BoardDAO() {
 		String user = "hr";
 		String pass = "hr";
@@ -27,16 +27,16 @@ public class BoardDAO {
 		}
 
 	}
-
+//보드 형식 리스트 만들기
 	public List<Board> getBoardList() {
-		String sql = "select * from board";
+		String sql = "select * from board order by 1 desc"; //역순보기
 		List<Board> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Board br = new Board();
-				br.setBoardNo(rs.getInt("board_no"));
+				br.setBoardNo(rs.getInt("board_no")); //컬럼명 
 				br.setContent(rs.getString("content"));
 				br.setWriter(rs.getString("writer"));
 				br.setDate(rs.getString("create_date"));

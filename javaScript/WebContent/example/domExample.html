@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>domExample.html</title>
+</head>
+<body>
+    <button id = "add">Add Click</button>
+    <ul id = "parentList">
+        <li>One</li>
+        <li>One-1</li> 
+        <li>Two</li>
+       
+    </ul>
+    <script>
+        //바로위 ul테그에 마우스 오버 이벤트 달아 주는 방법
+        var lis = document.querySelectorAll("ul li");
+        console.log(lis);
+        lis.forEach(function(a, b, c,){
+            console.log(a);
+            a.addEventListener("mouseover",function(){
+                a.style.backgroundColor="yellow";
+                
+            });
+            a.addEventListener("mouseout",function(){
+                a.style.backgroundColor="";
+            });
+            a.addEventListener("click", function(){ 
+                var inputs = document.querySelectorAll("#parentList input");
+                inputs.forEach(function(obj){
+                    obj.parentNode.remove(); // li>input 지우는거 , parentNode(부모테그 삭제) ==li가 삭제됨
+                })
+                lis.forEach(function(objs){
+                    if(objs.style.display == "none")
+                        objs.style.display = "";
+                })
+                var text = a.innerHTML;
+                var $li = document.createElement("li");
+                var $input = document.createElement("input");
+                //var $text = document.createElement(text);
+                var $button = document.createElement("button")
+                $button.innerHTML ="수정";
+                $input.value = text;
+                $li.appendChild($input);
+                $li.appendChild($button);
+                a.after($li);
+                a.style.display='none';
+                
+
+            })
+
+        });
+     
+
+      //  for(var i=0; lis.length; i++){
+       // }
+        
+        var numbers = ["Three", "Four", "Five"];
+        var btn = document.getElementById("add"); //버튼에 이벤트 걸어주는 방법
+       console.log(btn);
+       btn.innerHTML = "한줄 추가"; //위에 버튼안에 들어가느는 텍스트
+       var numberIdx = 0; //첫번째 값부터 나오게하기 위해서 
+        btn.addEventListener("click",function(e){
+         console.log(e);  
+        var $li = document.createElement("li") //li테그를 만듬
+        $li.addEventListener("mouseover",function(e){
+            console.log(e.target);
+            e.target.style.backgroundColor="yellow";
+        })
+        $li.addEventListener("mouseout",function(e){
+            console.log(e.target);
+            e.target.style.backgroundColor="";
+        })
+       
+        var $text = document.createTextNode(numbers[numberIdx]) //numbers배열안의 인덱스 값
+        $li.appendChild($text);
+        document.getElementById("parentList").appendChild($li); //출력문장 Id불러와서 ul값을
+       numberIdx++;
+        })
+            
+
+    </script>
+</body>
+</html>
