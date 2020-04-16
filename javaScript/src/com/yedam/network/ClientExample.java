@@ -30,7 +30,7 @@ public class ClientExample extends Application {
 			public void run() {
 				socket = new Socket();
 				try {
-					socket.connect(new InetSocketAddress("192.168.0.18", 5001));
+					socket.connect(new InetSocketAddress("192.168.0.69", 5001));
 					Platform.runLater(() -> {
 						displayText("[연결 완료: " + socket.getRemoteSocketAddress() + "]");
 						btnConn.setText("stop");
@@ -43,6 +43,7 @@ public class ClientExample extends Application {
 						stopClient();
 					}
 				}
+				receive();
 			}
 		};
 		thread.start();
@@ -67,8 +68,8 @@ public class ClientExample extends Application {
 	// receive()
 	void receive() {
 		while (true) {
-			byte[] buf = new byte[100];
 			try {
+			byte[] buf = new byte[100];
 				InputStream is = socket.getInputStream();
 				int readByte = is.read(buf);
 				if (readByte == -1) {
@@ -147,7 +148,7 @@ public class ClientExample extends Application {
 		btnSend = new Button("send");
 		btnSend.setPrefSize(60, 30);
 		btnSend.setDisable(true);
-		btnSend.setOnAction(event -> send(txtInput.getText()));
+		btnSend.setOnAction(event -> send("[비밀]"+txtInput.getText()));
 
 		bottom.setCenter(txtInput);
 		bottom.setLeft(btnConn);

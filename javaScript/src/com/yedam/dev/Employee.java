@@ -12,6 +12,7 @@ public class Employee {
 	double commissionPct;
 	int managerId;
 	int departmentId;
+	
 	public int getEmployeeId() {
 		return employeeId;
 	}
